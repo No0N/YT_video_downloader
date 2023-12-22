@@ -47,15 +47,15 @@ def download_video_and_audio(video_url, output_path):
     res_itag_part2 = sorted(res_itag_part2, key=sorted_key_func)
     res_itag_part3 = sorted(res_itag_part3, key=sorted_key_func)
     
-    # Блок для контроля присвоения номера индекса к качеству потока
-    # for i in res_itag_part1:
-    #     print(i)
-    # print()    
-    # for i in res_itag_part2:
-    #     print(i)    
-    # print()   
-    # for i in res_itag_part3:
-    #     print(i)
+    Блок для контроля присвоения номера индекса к качеству потока
+    for i in res_itag_part1:
+        print(i)
+    print()    
+    for i in res_itag_part2:
+        print(i)    
+    print()   
+    for i in res_itag_part3:
+        print(i)
         
     combined_res_itag_dict = {}
     for index, item in enumerate(res_itag_part1):
