@@ -3,6 +3,8 @@ from moviepy.editor import VideoFileClip, AudioFileClip
 import os
 import sys
 
+#проверка что файлы на гите апдэйтсятся 
+
 def download_video_and_audio(video_url, output_path):
 
     yt = YouTube(video_url)
