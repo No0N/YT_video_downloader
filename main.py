@@ -3,8 +3,6 @@ from moviepy.editor import VideoFileClip, AudioFileClip
 import os
 import sys
 
-#проверка что файлы на гите апдэйтсятся 
-
 def download_video_and_audio(video_url, output_path):
 
     yt = YouTube(video_url)
@@ -68,7 +66,7 @@ def download_video_and_audio(video_url, output_path):
         video_info = stream_info.split(":")[0]
         list_number = 1 if index < len(res_itag_part1) else 2
         print(f"{index + 1}. {video_info}")
-    
+       
     # Выводим доступные видео стримы пользователю    
     try:
         selected_index = int(input("Введите номер выбранного видео стрима: ")) - 1
