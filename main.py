@@ -1,6 +1,7 @@
 from pytube import YouTube
 from moviepy.editor import VideoFileClip, AudioFileClip
 import os
+import sys
 
 def download_video_and_audio(video_url, output_path):
 
@@ -46,32 +47,37 @@ def download_video_and_audio(video_url, output_path):
     res_itag_part2 = sorted(res_itag_part2, key=sorted_key_func)
     res_itag_part3 = sorted(res_itag_part3, key=sorted_key_func)
     
-    
-    for i in res_itag_part1:
-        print(i)
-    print()    
-    for i in res_itag_part2:
-        print(i)    
-    print()   
-    for i in res_itag_part3:
-        print(i)
+    # Блок для контроля присвоения номера индекса к качеству потока
+    # for i in res_itag_part1:
+    #     print(i)
+    # print()    
+    # for i in res_itag_part2:
+    #     print(i)    
+    # print()   
+    # for i in res_itag_part3:
+    #     print(i)
         
     combined_res_itag_dict = {}
     for index, item in enumerate(res_itag_part1):
         combined_res_itag_dict[item.split(":")[1]] = item
     for index, item in enumerate(res_itag_part2, start=len(res_itag_part1)):
         combined_res_itag_dict[item.split(":")[1]] = item
-
-    # Выводим доступные видео стримы пользователю
-    print("Выберите видео стрим:")
     for index, (itag, stream_info) in enumerate(combined_res_itag_dict.items()):
         video_info = stream_info.split(":")[0]
         list_number = 1 if index < len(res_itag_part1) else 2
-        print(f"{index + 1}. {video_info} ({list_number})")
-
-    selected_index = int(input("Введите номер выбранного видео стрима: ")) - 1
+        print(f"{index + 1}. {video_info}")
+    
+    # Выводим доступные видео стримы пользователю    
+    try:
+        selected_index = int(input("Введите номер выбранного видео стрима: ")) - 1
+    except ValueError:
+        print("Ошибка: введено некорректное значение. Введите число.")
+        # Можно в этом месте принять решение, как обработать ошибку (возможно, запросить ввод снова или завершить программу).
+        sys.exit(1)  # Выход с кодом ошибки
+        
     selected_itag = list(combined_res_itag_dict.keys())[selected_index]
     selected_stream = yt.streams.get_by_itag(selected_itag)
+
 
     # Получаем выбранный itag и сохраняем его в переменную chosen_itag
     chosen_itag = selected_stream.itag
@@ -112,7 +118,7 @@ def merge_video_and_audio(video_path, audio_path, output_path):
 if __name__ == "__main__":
     video_url = "https://www.youtube.com/watch?v=T6E9_kF8j-U"
     output_path = f"download/{YouTube(video_url).title}"
-
+    
     download_video_and_audio(video_url, output_path)
 
     video_path = os.path.join(output_path, "video")
