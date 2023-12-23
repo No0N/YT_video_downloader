@@ -116,7 +116,7 @@ def merge_video_and_audio(video_path, audio_path, output_path):
     print("Слияние завершено.")
 
 if __name__ == "__main__":
-    video_url = "https://www.youtube.com/watch?v=T6E9_kF8j-U"
+    video_url = "https://youtu.be/7PIji8OubXU?si=qSSiGYBCOb5GtJJ7"
     output_path = f"download/{YouTube(video_url).title}"
     
     download_video_and_audio(video_url, output_path)
